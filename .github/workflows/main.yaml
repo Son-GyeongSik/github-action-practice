@@ -51,3 +51,14 @@ jobs:
         } else {
           echo "FALSE"
         }
+
+    - name: Get secrets
+      shell: bash
+      run: |
+        echo "MY_SECRET: ${{ secrets.MY_SECRET }}"
+
+        if("${{ secrets.MY_SECRET }}" -eq "ACCESS TOKEN") {
+          echo "TRUE"
+        } else {
+          echo "FALSE"
+        }
