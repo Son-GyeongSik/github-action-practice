@@ -34,4 +34,4 @@ jobs:
       shell: bash
       run: |
         echo "GEN_VALUE_1: $GEN_VALUE_1"
-        echo "GEN_VALUE_2: ${{ env.GEN_VALUE_2 }}"
+        echo "GEN_VALUE_2: ${{ env.GEN_VALUE_2 a}}"
