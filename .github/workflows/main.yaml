@@ -40,7 +40,8 @@ jobs:
         echo "STEP1 : $STEP_VALUE_1"
         echo "STEP2 : $STEP_VALUE_2"
 
-  name: 'Second Job'
+  second-job:
+    name: 'Second Job'
 
     #실행하는 os 지정
     runs-on: ubuntu-latest
