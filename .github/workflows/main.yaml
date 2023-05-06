@@ -29,7 +29,7 @@ jobs:
         node-version: '${{ matrix.node }}'
   
     - name: Run only on Ubuntu
-      if: matrix.os == 'ubun.latest'
+      if: matrix.os == 'ubuntu.latest'
       shell: bash
       run: |
         echo "Hello from ${{ matrix.os }}"
