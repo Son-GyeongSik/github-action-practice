@@ -7,73 +7,17 @@ on:
     - main
 
 jobs:
-  #job 이름
-  build-test:
-    name: 'Build Test Job'
-
-    #실행하는 os 지정
+  somabot:
+    name: "Send Message By Bot"
     runs-on: ubuntu-latest
-
-    #실제 구동 부분
     steps:
-    - name: Hello World
+    - name: Send message to Webex space
       shell: bash
       run: |
-        echo "Hello World"
-
-  dev:
-    name: "Dev Job"
-    needs:
-    - build-test
-
-    runs-on: ubuntu-latest
-
-    #실제 구동 부분
-    steps:
-    - name: Hello World
-      shell: bash
-      run: |
-        echo "Hello World"
-
-  test1:
-    name: "Test1 Job"
-    needs:
-    - dev
-
-    runs-on: ubuntu-latest
-
-    #실제 구동 부분
-    steps:
-    - name: Hello World
-      shell: bash
-      run: |
-        echo "Hello World"
-
-  test2:
-    name: "Test2 Job"
-    needs:
-    - dev
-
-    runs-on: ubuntu-latest
-
-    #실제 구동 부분
-    steps:
-    - name: Hello World
-      shell: bash
-      run: |
-        echo "Hello World"
-
-  production:
-    name: "Production Job"
-    needs:
-    - test1
-    - test2
-
-    runs-on: ubuntu-latest
-
-    #실제 구동 부분
-    steps:
-    - name: Hello World
-      shell: bash
-      run: |
-        echo "Hello World"
+        curl --location --request POST https://webexapis.com/v1/messages \
+          --header 'Content-Type: application/json' \
+          --header 'Authorization: Bearer ${{ secrets.WEBEX_TOKEN }}' \
+          --data-raw '{
+            "roomID": "${{ secrets.WEBEX_ROOM_ID }}",
+            "text": "안녕하세요 깃헙액션으로 이사온 손경식 봇입니다."
+          }'
