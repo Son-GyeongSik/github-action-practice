@@ -27,3 +27,9 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: '${{ matrix.node }}'
+  
+    - name: Run only on Ubuntu
+      if: matrix.os == 'ubun.latest'
+      shell: bash
+      run: |
+        echo "Hello from ${{ matrix.os }}"
