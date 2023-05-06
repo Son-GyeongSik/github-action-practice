@@ -20,5 +20,12 @@ jobs:
           --data '{
             "roomId": "${{ secrets.WEBEX_ROOM_ID}}",
             "text": "안녕하세요 손경식봇입니다.",
-            "markdown": "*안녕하세요 포스트맨을 달고 돌아온 손경식 봇입니다*"
-          }   '
+            "markdown": "*안녕하세요 깃헙액션을 달고 돌아온 손경식 봇입니다*"
+          }'
+      
+    - name: Send Message to WebEx using pre-built action
+      uses: chrivand/action-webex-js@main
+      env:
+        WEBEX_TOKEN: ${{ secrets.WEBEX_TOKEN }}
+        WEBEX_ROOM_ID: ${{ secrets.WEBEX_ROOM_ID }}
+        MARKDOWN_MESSAGE: "**Hello, world! You just ran an action from ${{ github.repository }}.**"
