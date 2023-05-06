@@ -43,5 +43,5 @@ jobs:
     - name: Get Hello world values
       shell: bash
       run: |
-        echo "GEN_VALUE_1: ${{ steps.step1.outputs.GEN_VALUE1 }}"
-        echo "GEN_VALUE_2: ${{ steps.step2.outputs.GEN_VALUE2 }}"
+        echo "GEN_VALUE_1: ${{ steps.step1.outputs.GEN_VALUE_1 }}"
+        echo "GEN_VALUE_2: ${{ steps.step2.outputs.GEN_VALUE_2 }}"
