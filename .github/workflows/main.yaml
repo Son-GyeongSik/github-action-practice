@@ -1,35 +1,79 @@
 name : 'basic'
 
 #특정 액션에서만 실행 (브랜치, 파일 경로도 지정 가능)
-on: push 
+on: 
+  push:
+    branches:
+    - main
 
 jobs:
   #job 이름
-  first-job:
-    name: 'First Job'
-
-    strategy:
-      matrix:
-        os: [ 'windows-latest', 'macos-latest', 'ubuntu-latest']
-        node: [ '16.x', '18.x' ]
+  build-test:
+    name: 'Build Test Job'
 
     #실행하는 os 지정
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
 
     #실제 구동 부분
     steps:
-    - name: Say Hello from OS - ${{ matrix.os }}
+    - name: Hello World
       shell: bash
       run: |
-        echo "Hello World from ${{ matrix.os }}"
+        echo "Hello World"
 
-    - name: Setup node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '${{ matrix.node }}'
-  
-    - name: Run only on Ubuntu
-      if: matrix.os == 'ubuntu-latest'
+  dev:
+    name: "Dev Job"
+    needs:
+    - build-test
+
+    runs-on: ubuntu-latest
+
+    #실제 구동 부분
+    steps:
+    - name: Hello World
       shell: bash
       run: |
-        echo "Hello from ${{ matrix.os }}"
+        echo "Hello World"
+
+  test1:
+    name: "Test1 Job"
+    needs:
+    - dev
+
+    runs-on: ubuntu-latest
+
+    #실제 구동 부분
+    steps:
+    - name: Hello World
+      shell: bash
+      run: |
+        echo "Hello World"
+
+  test2:
+    name: "Test2 Job"
+    needs:
+    - dev
+
+    runs-on: ubuntu-latest
+
+    #실제 구동 부분
+    steps:
+    - name: Hello World
+      shell: bash
+      run: |
+        echo "Hello World"
+
+  production:
+    name: "Production Job"
+    needs:
+    - test1
+    - test2
+
+    runs-on: ubuntu-latest
+
+    #실제 구동 부분
+    steps:
+    - name: Hello World
+      shell: bash
+      run: |
+        echo "Hello World"
