@@ -14,10 +14,11 @@ jobs:
     - name: Send message to Webex space
       shell: bash
       run: |
-          curl --location --request POST 'https://webexapis.com/v1/messages' \
+          curl --location 'https://webexapis.com/v1/messages' \
           --header 'Content-Type: application/json' \
           --header 'Authorization: Bearer ${{ secrets.WEBEX_TOKEN }}' \
-          --data-raw '{
-            "roomID": "${{ secrets.WEBEX_ROOM_ID }}",
-            "text": "안녕하세요 깃헙액션으로 이사온 손경식 봇입니다."
-          }'
+          --data '{
+            "roomId": "${{ secrets.WEBEX_ROOM_ID}}",
+            "text": "안녕하세요 손경식봇입니다.",
+            "markdown": "*안녕하세요 포스트맨을 달고 돌아온 손경식 봇입니다*"
+          }   '
