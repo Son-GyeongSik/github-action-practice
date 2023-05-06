@@ -9,7 +9,8 @@ jobs:
     name: 'First Job'
 
     strategy:
-      os: [ 'windows-latest', 'macos-latest', 'ubuntu-latest']
+      matrix:
+        os: [ 'windows-latest', 'macos-latest', 'ubuntu-latest']
 
     #실행하는 os 지정
     runs-on: ${{ matrix.os }}
