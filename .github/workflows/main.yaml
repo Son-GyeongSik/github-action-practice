@@ -8,57 +8,15 @@ jobs:
   first-job:
     name: 'First Job'
 
+    strategy:
+      os: [ 'windows-latest', 'macos-latest', 'ubuntu-latest']
+
     #실행하는 os 지정
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
 
     #실제 구동 부분
     steps:
-    - name: Get GITHUB_ENV
+    - name: Say Hello from OS - ${{ matrix.os }}
       shell: bash
       run: |
-        echo $GITHUB_ENV
-
-    - name: Say hello world 1
-      id: step1
-      shell: bash
-      env:
-        STEP_VALUE_1: "This is a env var from the step lv. #1"
-      run : |
-        generatedValue1=$(echo $RANDOM)
-
-        echo $generatedValue1
-        echo "GEN_VALUE_1=$generatedValue1" >> $GITHUB_OUTPUT
-
-    - name: Say hello world 2
-      id: step2
-      shell: pwsh
-      env:
-        STEP_VALUE_2: "This is a env var from the step lv. #2"
-      run: |
-        $generatedValue2="APIKEY"
-
-        echo "::add-mask::$generatedValue2"
-        echo $generatedValue2
-        echo "GEN_VALUE_2=$generatedValue2" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf-8 -Append
-
-    - name: Get Hello world values
-      shell: pwsh
-      run: |
-        echo "GEN_VALUE_1: ${{ steps.step1.outputs.GEN_VALUE_1 }}"
-        echo "GEN_VALUE_2: ${{ steps.step2.outputs.GEN_VALUE_2 }}"
-        if ("${{ steps.step2.outputs.GEN_VALUE_2 }}" -eq "APIKEY") {
-          echo "TRUE"
-        } else {
-          echo "FALSE"
-        }
-
-    - name: Get secrets
-      shell: bash
-      run: |
-        echo "MY_SECRET: ${{ secrets.MY_SECRET }}"
-
-        if("${{ secrets.MY_SECRET }}" -eq "ACCESS TOKEN") {
-          echo "TRUE"
-        } else {
-          echo "FALSE"
-        }
+        echo "Hello World from ${{ matrix.os }}"
