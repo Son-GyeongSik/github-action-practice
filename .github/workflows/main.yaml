@@ -3,6 +3,9 @@ name : 'basic'
 #특정 액션에서만 실행 (브랜치, 파일 경로도 지정 가능)
 on: push 
 
+env:
+  GLOBAL_VALUE: "This is a env var from the global lv."
+
 jobs:
   #job 이름
   first-job:
@@ -11,13 +14,59 @@ jobs:
     #실행하는 os 지정
     runs-on: ubuntu-latest
 
+    env:
+      JOB_VALUE_1: "This is a env var from the job lv. #1"
+
     #실제 구동 부분
     steps:
     - name: Say hello world 1
       shell: bash
+      env:
+        STEP_VALUE_1: "This is a env var from the step lv. #1"
       run : |
-        echo "Hello world from step 1"
+        echo "GLOBAL : $GLOBAL_VALUE"
+        echo "JOB1 : $JOB_VALUE_1"
+        echo "JOB2 : $JOB_VALUE_2"
+        echo "STEP1 : $STEP_VALUE_1"
+        echo "STEP2 : $STEP_VALUE_2"
     - name: Say hello world 2
       shell: pwsh
+      env:
+        STEP_VALUE_2: "This is a env var from the step lv. #2"
       run: |
-        echo "Hello world from step 2"
+        echo "GLOBAL : $GLOBAL_VALUE"
+        echo "JOB1 : $JOB_VALUE_1"
+        echo "JOB2 : $JOB_VALUE_2"
+        echo "STEP1 : $STEP_VALUE_1"
+        echo "STEP2 : $STEP_VALUE_2"
+
+  name: 'Second Job'
+
+    #실행하는 os 지정
+    runs-on: ubuntu-latest
+
+    env:
+      JOB_VALUE_2: "This is a env var from the job lv. #2"
+
+    #실제 구동 부분
+    steps:
+    - name: Say hello world 1
+      shell: bash
+      env:
+        STEP_VALUE_1: "This is a env var from the step lv. #1"
+      run : |
+        echo "GLOBAL : $GLOBAL_VALUE"
+        echo "JOB1 : $JOB_VALUE_1"
+        echo "JOB2 : $JOB_VALUE_2"
+        echo "STEP1 : $STEP_VALUE_1"
+        echo "STEP2 : $STEP_VALUE_2"
+    - name: Say hello world 2
+      shell: pwsh
+      env:
+        STEP_VALUE_2: "This is a env var from the step lv. #2"
+      run: |
+        echo "GLOBAL : $GLOBAL_VALUE"
+        echo "JOB1 : $JOB_VALUE_1"
+        echo "JOB2 : $JOB_VALUE_2"
+        echo "STEP1 : $STEP_VALUE_1"
+        echo "STEP2 : $STEP_VALUE_2"
