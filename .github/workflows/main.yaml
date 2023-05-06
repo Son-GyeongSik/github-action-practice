@@ -13,6 +13,11 @@ jobs:
 
     #실제 구동 부분
     steps:
+    - name: Get GITHUB_ENV
+      shell: bash
+      run: |
+        echo $GITHUB_ENV
+
     - name: Say hello world 1
       shell: bash
       env:
@@ -20,7 +25,9 @@ jobs:
       run : |
         generatedValue1=$(echo $RANDOM)
 
+        echo $generatedValue1
         echo "GEN_VALUE_1=$generatedValue1" >> $GITHUB_ENV
+
     - name: Say hello world 2
       shell: pwsh
       env:
@@ -28,6 +35,7 @@ jobs:
       run: |
         $generatedValue2=$(Get-Random -Max 99999)
 
+        echo $generatedValue2
         echo "GEN_VALUE_2=$generatedValue2" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf-8 -Append
 
     - name: Get Hello world values
