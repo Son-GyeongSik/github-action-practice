@@ -1,0 +1,23 @@
+name : 'basic'
+
+#특정 액션에서만 실행 (브랜치, 파일 경로도 지정 가능)
+on: push 
+
+jobs:
+  #job 이름
+  first-job:
+    name: 'First Job'
+
+    #실행하는 os 지정
+    runs-on: ubuntu-latest
+
+    #실제 구동 부분
+    steps:
+    - name: Say hello world 1
+      shell: bash
+      run : |
+        echo "Hello world from step 1"
+    - name: Say hello world 2
+      shell: pwsh
+      run: |
+        echo "Hello world from step 2"
