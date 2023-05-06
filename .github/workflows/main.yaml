@@ -14,7 +14,7 @@ jobs:
     - name: Send message to Webex space
       shell: bash
       run: |
-        curl --location --request POST https://webexapis.com/v1/messages \
+        curl --location --request POST 'https://webexapis.com/v1/messages' \
           --header 'Content-Type: application/json' \
           --header 'Authorization: Bearer ${{ secrets.WEBEX_TOKEN }}' \
           --data-raw '{
